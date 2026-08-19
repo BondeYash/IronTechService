@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { gsap, EASE, prefersReducedMotion } from "@/lib/gsap";
 import { inView } from "@/lib/in-view";
+import { useInViewport, usePageVisible } from "@/lib/use-in-viewport";
 import { cn } from "@/lib/utils";
 
 type KineticHeadingProps = {
@@ -172,23 +173,40 @@ export function Marquee({
   className?: string;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
+  const onScreen = useInViewport(wrapRef, "100px");
+  const pageVisible = usePageVisible();
+  const live = onScreen && pageVisible;
 
   useEffect(() => {
     const el = trackRef.current;
     if (!el || prefersReducedMotion()) return;
     const ctx = gsap.context(() => {
-      gsap.to(el, {
+      tweenRef.current = gsap.to(el, {
         xPercent: -50,
         duration: speed,
         ease: "none",
         repeat: -1,
+        paused: true,
       });
     }, el);
-    return () => ctx.revert();
+    return () => {
+      tweenRef.current = null;
+      ctx.revert();
+    };
   }, [speed]);
 
+  // Off-screen marquees are pure wasted compositing.
+  useEffect(() => {
+    const tween = tweenRef.current;
+    if (!tween) return;
+    if (live) tween.resume();
+    else tween.pause();
+  }, [live]);
+
   return (
-    <div className={cn("overflow-hidden", className)}>
+    <div ref={wrapRef} className={cn("overflow-hidden", className)}>
       <div ref={trackRef} className="flex w-max gap-10 will-change-transform">
         {[...items, ...items].map((item, i) => (
           <span

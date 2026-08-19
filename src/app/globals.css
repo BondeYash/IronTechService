@@ -180,6 +180,22 @@
       linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
     background-size: 72px 72px;
   }
+  /* A 736px box behind a 140px blur filter is a real raster cost on first
+     paint; the same glow as a gradient is free. */
+  .hero-glow {
+    background: radial-gradient(
+      circle at center,
+      color-mix(in oklab, var(--color-molten-500) 22%, transparent) 0%,
+      color-mix(in oklab, var(--color-molten-600) 9%, transparent) 42%,
+      transparent 70%
+    );
+  }
+  /* Skips layout and paint for sections that are off screen. Only used where
+     the height is stable, so the scrollbar never jumps. */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 34rem;
+  }
   .text-stroke {
     -webkit-text-stroke: 1px var(--border);
     color: transparent;
@@ -224,7 +240,6 @@
 }
 html.reveal-ready [data-reveal] {
   opacity: 0;
-  will-change: transform, opacity;
 }
 
 @media (prefers-reduced-motion: reduce) {

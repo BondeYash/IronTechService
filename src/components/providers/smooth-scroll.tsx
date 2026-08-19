@@ -15,11 +15,14 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (prefersReducedMotion()) return;
 
+    // 1.1s of inertia reads as lag rather than polish on a first visit;
+    // 0.85 still glides but tracks the wheel closely.
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 0.85,
       easing: (t) => 1 - Math.pow(1 - t, 4),
       smoothWheel: true,
       touchMultiplier: 1.6,
+      syncTouch: false,
     });
 
     lenis.on("scroll", ScrollTrigger.update);

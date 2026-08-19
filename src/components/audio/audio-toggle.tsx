@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePageVisible } from "@/lib/use-in-viewport";
 import { Volume2, VolumeX } from "lucide-react";
 import { useAudio } from "./audio-engine";
 import { cn } from "@/lib/utils";
@@ -12,6 +13,7 @@ import { cn } from "@/lib/utils";
 export function AudioToggle({ className }: { className?: string }) {
   const { enabled, ready, toggle, spectrum } = useAudio();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const pageVisible = usePageVisible();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -44,7 +46,9 @@ export function AudioToggle({ className }: { className?: string }) {
           const bin = data[Math.floor((i / bars) * data.length)];
           v = Math.max(0.06, Math.min(1, (bin + 90) / 70));
         } else {
-          v = 0.06 + Math.abs(Math.sin(Date.now() / 900 + i * 0.5)) * 0.1;
+          // Static idle bars: this canvas sits in the header on every page, so
+          // it must not animate while the sound is off.
+          v = 0.06 + ((i % 5) + 1) * 0.018;
         }
         const bh = Math.max(2 * dpr, v * h);
         ctx.fillStyle = ready
@@ -52,7 +56,8 @@ export function AudioToggle({ className }: { className?: string }) {
           : "oklch(0.6 0.01 250)";
         ctx.fillRect(i * (bw + gap), h - bh, bw, bh);
       }
-      raf = requestAnimationFrame(draw);
+      // Only the live spectrum needs a frame loop; silent means paint once.
+      if (ready && pageVisible) raf = requestAnimationFrame(draw);
     };
     draw();
 
@@ -61,7 +66,7 @@ export function AudioToggle({ className }: { className?: string }) {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
     };
-  }, [ready, spectrum]);
+  }, [ready, spectrum, pageVisible]);
 
   return (
     <button

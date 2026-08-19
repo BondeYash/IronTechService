@@ -75,7 +75,7 @@ export function Hero() {
             className="border-border/60 bg-border/60 grid grid-cols-2 gap-px overflow-hidden rounded-xl border sm:grid-cols-4 lg:grid-cols-2"
           >
             {stats.slice(0, 4).map((s) => (
-              <div key={s.label} className="bg-background/70 p-5 backdrop-blur">
+              <div key={s.label} className="bg-background/85 p-5">
                 <p className="font-heading text-primary text-3xl tracking-tight [--heading-weight:800]">
                   {s.value.toLocaleString()}
                   {s.suffix}

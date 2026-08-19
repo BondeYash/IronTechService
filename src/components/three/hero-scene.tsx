@@ -1,13 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { PerformanceMonitor } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
 import { ForgePlane } from "./forge-plane";
 import { SteelTruss } from "./steel-truss";
 import { ScrollDistortion, type ScrollDistortionHandle } from "./scroll-distortion";
 import { useAudioEnergy } from "@/components/audio/audio-engine";
+import { useInViewport, usePageVisible } from "@/lib/use-in-viewport";
+import { deviceTier } from "@/lib/device";
 
 function Rig({ pointer }: { pointer: React.RefObject<{ x: number; y: number }> }) {
   useFrame((state, delta) => {
@@ -33,12 +36,24 @@ function VelocityBridge({
   return null;
 }
 
-export default function HeroScene() {
+export default function HeroScene({ onGiveUp }: { onGiveUp?: () => void }) {
   const pointer = useRef({ x: 0, y: 0 });
   const scroll = useRef(0);
   const velocity = useRef(0);
   const distortion = useRef<ScrollDistortionHandle | null>(null);
   const energy = useAudioEnergy();
+  const wrap = useRef<HTMLDivElement>(null);
+
+  // The hero is one screen tall but the page is eleven: without this the
+  // shader keeps rendering for the entire scroll, competing with everything.
+  const onScreen = useInViewport(wrap, "120px");
+  const pageVisible = usePageVisible();
+  // Read once on mount; the scene is client-only so this never runs on the server.
+  const [maxDpr] = useState(() => (deviceTier() === "high" ? 1.5 : 1.25));
+  // Measured, not guessed: if this machine cannot hold frames we shed the
+  // bloom pass and resolution, and if it still cannot, we leave entirely.
+  const [degraded, setDegraded] = useState(false);
+  const declines = useRef(0);
 
   useEffect(() => {
     let last = window.scrollY;
@@ -74,15 +89,25 @@ export default function HeroScene() {
   }, []);
 
   return (
+    <div ref={wrap} className="absolute inset-0">
     <Canvas
       camera={{ position: [0, 0.3, 8.5], fov: 42 }}
-      dpr={[1, 1.75]}
-      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      frameloop={onScreen && pageVisible ? "always" : "never"}
+      dpr={[1, degraded ? 1 : maxDpr]}
+      gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping;
         gl.toneMappingExposure = 0.9;
       }}
     >
+      <PerformanceMonitor
+        onDecline={() => {
+          declines.current += 1;
+          if (declines.current === 1) setDegraded(true);
+          else onGiveUp?.();
+        }}
+      />
+
       <color attach="background" args={["#0a0d12"]} />
       <fog attach="fog" args={["#0a0d12", 9, 22]} />
 
@@ -98,9 +123,14 @@ export default function HeroScene() {
       <VelocityBridge velocity={velocity} target={distortion} />
 
       <EffectComposer>
-        <Bloom intensity={0.85} luminanceThreshold={0.55} luminanceSmoothing={0.25} mipmapBlur />
+        {degraded ? (
+          <></>
+        ) : (
+          <Bloom intensity={0.85} luminanceThreshold={0.55} luminanceSmoothing={0.25} mipmapBlur />
+        )}
         <ScrollDistortion ref={distortion} strength={1} />
       </EffectComposer>
     </Canvas>
+    </div>
   );
 }

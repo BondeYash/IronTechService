@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
+import { useInViewport, usePageVisible } from "@/lib/use-in-viewport";
 import { projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
 
@@ -15,13 +16,19 @@ function Row({
   direction?: 1 | -1;
   speed?: number;
 }) {
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
   const track = useRef<HTMLDivElement>(null);
+  const wrap = useRef<HTMLDivElement>(null);
+  const onScreen = useInViewport(wrap, "100px");
+  const pageVisible = usePageVisible();
+  const live = onScreen && pageVisible;
 
   useEffect(() => {
     const el = track.current;
     if (!el || prefersReducedMotion()) return;
+    let tween: gsap.core.Tween | undefined;
     const ctx = gsap.context(() => {
-      gsap.fromTo(
+      tween = gsap.fromTo(
         el,
         { xPercent: direction === 1 ? 0 : -50 },
         {
@@ -29,14 +36,28 @@ function Row({
           duration: speed,
           ease: "none",
           repeat: -1,
+          paused: true,
         },
       );
     }, el);
-    return () => ctx.revert();
+    tweenRef.current = tween ?? null;
+    return () => {
+      tweenRef.current = null;
+      ctx.revert();
+    };
   }, [direction, speed]);
 
+  // An infinite marquee compositing 28 photos will happily run for the whole
+  // page if you let it. It only moves while someone is looking at it.
+  useEffect(() => {
+    const tween = tweenRef.current;
+    if (!tween) return;
+    if (live) tween.resume();
+    else tween.pause();
+  }, [live]);
+
   return (
-    <div className="overflow-hidden">
+    <div ref={wrap} className="overflow-hidden">
       <div ref={track} className="flex w-max gap-4 will-change-transform">
         {[...items, ...items].map((item, i) => (
           <figure
@@ -48,6 +69,8 @@ function Row({
               alt={item.title}
               fill
               sizes="320px"
+              quality={55}
+              loading="lazy"
               className="object-cover grayscale-[0.35] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
             />
             <figcaption className="from-background/95 absolute inset-x-0 bottom-0 bg-gradient-to-t to-transparent p-3 pt-10 font-mono text-[0.58rem] tracking-[0.14em] uppercase">
@@ -65,14 +88,16 @@ function Row({
  * with real work rather than stock photography.
  */
 export function PhotoWall({ className }: { className?: string }) {
-  const half = Math.ceil(projects.length / 2);
-  const top = projects.slice(0, half);
-  const bottom = projects.slice(half);
+  // Each row is duplicated for the seamless loop, so this is already 32 images
+  // in the DOM. Showing all 44 projects here cost more than it showed.
+  const wall = projects.slice(0, 16);
+  const top = wall.slice(0, 8);
+  const bottom = wall.slice(8);
 
   return (
     <section
       className={cn(
-        "border-border/60 relative space-y-4 overflow-hidden border-y py-16",
+        "border-border/60 cv-auto relative space-y-4 overflow-hidden border-y py-16",
         className,
       )}
     >
