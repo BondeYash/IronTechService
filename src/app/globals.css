@@ -1,26 +1,241 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-display);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  /* brand scales */
+  --color-molten-50: oklch(0.97 0.03 70);
+  --color-molten-200: oklch(0.9 0.09 68);
+  --color-molten-400: oklch(0.79 0.16 60);
+  --color-molten-500: oklch(0.72 0.19 55);
+  --color-molten-600: oklch(0.64 0.19 47);
+  --color-molten-700: oklch(0.53 0.17 42);
+  --color-arc-100: oklch(0.95 0.03 215);
+  --color-arc-300: oklch(0.85 0.09 225);
+  --color-arc-500: oklch(0.72 0.14 240);
+  --color-steel-50: oklch(0.97 0.004 250);
+  --color-steel-200: oklch(0.86 0.008 250);
+  --color-steel-400: oklch(0.63 0.012 250);
+  --color-steel-600: oklch(0.42 0.014 250);
+  --color-steel-800: oklch(0.24 0.012 250);
+  --color-steel-900: oklch(0.17 0.01 250);
+  --color-steel-950: oklch(0.12 0.008 250);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Dark is the shipped default: an industrial, graphite-and-molten identity. */
+:root,
+.dark {
+  --background: oklch(0.13 0.008 250);
+  --foreground: oklch(0.96 0.004 250);
+  --card: oklch(0.17 0.01 250);
+  --card-foreground: oklch(0.96 0.004 250);
+  --popover: oklch(0.17 0.01 250);
+  --popover-foreground: oklch(0.96 0.004 250);
+  --primary: oklch(0.72 0.19 55);
+  --primary-foreground: oklch(0.16 0.02 50);
+  --secondary: oklch(0.24 0.012 250);
+  --secondary-foreground: oklch(0.96 0.004 250);
+  --muted: oklch(0.21 0.01 250);
+  --muted-foreground: oklch(0.68 0.012 250);
+  --accent: oklch(0.26 0.02 250);
+  --accent-foreground: oklch(0.96 0.004 250);
+  --destructive: oklch(0.63 0.2 25);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.72 0.19 55);
+  --radius: 0.5rem;
+  --sidebar: oklch(0.17 0.01 250);
+  --sidebar-foreground: oklch(0.96 0.004 250);
+  --sidebar-primary: oklch(0.72 0.19 55);
+  --sidebar-primary-foreground: oklch(0.16 0.02 50);
+  --sidebar-accent: oklch(0.24 0.012 250);
+  --sidebar-accent-foreground: oklch(0.96 0.004 250);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.72 0.19 55);
+
+  --grid-line: oklch(1 0 0 / 6%);
+  --surface-glass: oklch(0.19 0.01 250 / 55%);
+}
+
+.light {
+  --background: oklch(0.98 0.003 250);
+  --foreground: oklch(0.17 0.01 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.17 0.01 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.17 0.01 250);
+  --primary: oklch(0.58 0.18 45);
+  --primary-foreground: oklch(0.99 0.005 60);
+  --secondary: oklch(0.94 0.005 250);
+  --secondary-foreground: oklch(0.2 0.01 250);
+  --muted: oklch(0.95 0.004 250);
+  --muted-foreground: oklch(0.48 0.012 250);
+  --accent: oklch(0.93 0.008 250);
+  --accent-foreground: oklch(0.2 0.01 250);
+  --border: oklch(0.17 0.01 250 / 12%);
+  --input: oklch(0.17 0.01 250 / 16%);
+  --ring: oklch(0.58 0.18 45);
+  --grid-line: oklch(0.17 0.01 250 / 8%);
+  --surface-glass: oklch(1 0 0 / 70%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: auto;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-variation-settings: "wght" 400;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading;
+    font-variation-settings: "wght" var(--heading-weight, 700);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  ::selection {
+    background: var(--color-molten-500);
+    color: oklch(0.15 0.02 50);
+  }
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[88rem] px-5 sm:px-8 lg:px-12;
+  }
+  .glass {
+    background: var(--surface-glass);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  }
+  .eyebrow {
+    @apply text-primary font-mono text-[0.7rem] tracking-[0.28em] uppercase;
+  }
+  .hairline {
+    @apply via-border h-px w-full bg-gradient-to-r from-transparent to-transparent;
+  }
+  .blueprint-grid {
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+  .text-stroke {
+    -webkit-text-stroke: 1px var(--border);
+    color: transparent;
+  }
+}
+
+/* Gradient headings paint the glyphs of each animated word span, not the
+   block: KineticHeading wraps every word in an overflow-hidden span, and
+   background-clip on the heading itself would clip to the box instead. */
+.molten-text,
+.molten-text [data-word-inner] {
+  background: linear-gradient(
+    100deg,
+    var(--color-molten-200),
+    var(--color-molten-500) 45%,
+    var(--color-molten-700)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Arc blue — the cool counterpart to the molten accent, used where a large
+   headline would otherwise flood the viewport with orange. */
+.arc-text,
+.arc-text [data-word-inner] {
+  background: linear-gradient(
+    100deg,
+    var(--color-arc-100),
+    var(--color-arc-300) 45%,
+    var(--color-arc-500)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* GSAP reveal primitives: hidden until the client marks them ready, so
+   no-JS and reduced-motion visitors still get fully visible content. */
+[data-reveal] {
+  opacity: 1;
+}
+html.reveal-ready [data-reveal] {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.reveal-ready [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }
