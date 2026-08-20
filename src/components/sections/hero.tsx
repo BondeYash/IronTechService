@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, ArrowDown } from "lucide-react";
-import { HeroCanvas } from "@/components/three/hero-canvas";
+import { HeroVideo } from "@/components/sections/hero-video";
 import { KineticHeading } from "@/components/motion/kinetic-text";
 import { Reveal } from "@/components/motion/reveal";
 import { site } from "@/data/site";
@@ -11,11 +11,9 @@ import { stats } from "@/lib/stats";
 export function Hero() {
   return (
     <section className="relative flex min-h-[100svh] items-center overflow-hidden pt-28 pb-20">
-      <HeroCanvas className="pointer-events-none absolute inset-0 -z-10" />
-      <div className="blueprint-grid pointer-events-none absolute inset-0 -z-10 opacity-50" />
+      <HeroVideo className="pointer-events-none absolute inset-0 -z-10" />
+      <div className="blueprint-grid pointer-events-none absolute inset-0 -z-10 opacity-30" />
       <div className="from-background pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-64 bg-gradient-to-t to-transparent" />
-      {/* keeps the headline and body copy legible over a live shader */}
-      <div className="from-background/85 pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r via-transparent to-transparent" />
 
       <div className="container-x">
         <Reveal from="none" className="mb-7">

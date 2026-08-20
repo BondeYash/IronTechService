@@ -1,11 +1,11 @@
 import { Marquee } from "@/components/motion/kinetic-text";
 import { Counter } from "@/components/motion/counter";
 import { Reveal } from "@/components/motion/reveal";
-import { projectCount, totalTonnage, largestTonnage } from "@/lib/stats";
+import { deliveredPackages, totalTonnage, largestTonnage } from "@/lib/stats";
 import { deliverables } from "@/data/services";
 
 const figures = [
-  { value: projectCount, suffix: "", label: "Packages detailed" },
+  { value: deliveredPackages, suffix: "+", label: "Packages detailed" },
   { value: totalTonnage, suffix: " T", label: "Steel detailed to date" },
   { value: largestTonnage, suffix: " T", label: "Largest single package" },
   { value: deliverables.length, suffix: "", label: "Deliverables per job" },

@@ -155,8 +155,3 @@ export function useAudio(): AudioApi {
     }
   );
 }
-
-/** Shader-friendly accessor: always returns a stable ref. */
-export function useAudioEnergy(): React.RefObject<number> {
-  return useAudio().energy;
-}
