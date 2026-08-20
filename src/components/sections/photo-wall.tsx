@@ -89,7 +89,7 @@ function Row({
  */
 export function PhotoWall({ className }: { className?: string }) {
   // Each row is duplicated for the seamless loop, so this is already 32 images
-  // in the DOM. Showing all 44 projects here cost more than it showed.
+  // in the DOM. Showing the whole archive here cost more than it showed.
   const wall = projects.slice(0, 16);
   const top = wall.slice(0, 8);
   const bottom = wall.slice(8);

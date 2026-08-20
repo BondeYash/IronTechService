@@ -17,42 +17,42 @@ export const sectorDefs: Sector[] = [
     label: "Education",
     blurb:
       "Schools, campus additions and nursing colleges — long-span framing over gyms and assembly space, phased to match a summer shutdown.",
-    match: /school|college|maccray|cooper west|sinclair|rtr/i,
+    match: /school|college|maccray|cooper west|sinclair|rtr|ala lower|medrash/i,
   },
   {
     id: "healthcare",
     label: "Healthcare",
     blurb:
       "Clinics, surgery centres and care facilities where slab openings, equipment loads and hanger framing have to be right the first time.",
-    match: /clinic|surgic|surgery|medical|care|wellness|namcc|linda/i,
+    match: /clinic|surgic|surgery|medical|care|wellness|namcc|loma linda|pinehurst/i,
   },
   {
     id: "retail",
     label: "Retail & commercial",
     blurb:
       "Supermarkets, pharmacies, banks and mixed-use shells — repetitive bays, tight schedules and canopy or storefront steel.",
-    match: /publix|harris|cvs|piccadilly|mobile|bank|bbt|gateway|crestmoor|asc/i,
+    match: /publix|harris|cvs|piccadilly|mobile|bank|bb&t|gateway|crestmoor|asc|retail|westminster/i,
   },
   {
     id: "civic",
     label: "Civic & public",
     blurb:
       "Fire stations, county buildings and community facilities delivered against public procurement schedules.",
-    match: /fire ?station|county|nations|studio|tinsley/i,
+    match: /fire ?station|county|nations|studio|tinsley|muny/i,
   },
   {
     id: "industrial",
     label: "Industrial & energy",
     blurb:
       "Foundry platforms, precipitator structures and plant access steel detailed around existing equipment and live operations.",
-    match: /foundry|precipitator|plant|lodge|houston/i,
+    match: /foundry|precipitator|plant|lodge|houston|cold storage|mane tank/i,
   },
   {
     id: "misc",
     label: "Miscellaneous steel",
     blurb:
       "Stairs, handrails, ladders, cover rails and plate work — the packages that decide whether a building feels finished.",
-    match: /stair|rail|ladder|trus|entry/i,
+    match: /stair|rail|ladder|trus|entry|dumpster|model|frame/i,
   },
 ];
 

@@ -34,13 +34,23 @@ const filters: { id: Filter; label: string; test: (p: Project) => boolean }[] = 
   },
 ];
 
-/** Every seventh tile runs double width — breaks the grid out of a flat 3×N. */
-const isFeature = (i: number) => i % 7 === 0;
+/**
+ * Tile shape follows the photograph. Model shots are wide (~1.9:1) so they get
+ * landscape cells, stair and ladder shots are portrait and get tall ones, and
+ * every seventh wide shot runs double width to break the flat 3×N grid.
+ */
+function tileClass(p: Project, i: number) {
+  const portrait = p.height > p.width;
+  if (portrait) return "row-span-3";
+  if (i % 7 === 0) return "col-span-2 row-span-3";
+  return "row-span-2";
+}
 
 export function ProjectGrid() {
   const [filter, setFilter] = useState<Filter>("all");
   const [view, setView] = useState<View>("mosaic");
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const [shot, setShot] = useState(0);
   const [hovered, setHovered] = useState<number | null>(null);
 
   const gridRef = useRef<HTMLDivElement>(null);
@@ -171,10 +181,16 @@ export function ProjectGrid() {
 
   const close = useCallback(() => setLightbox(null), []);
   const step = useCallback(
-    (dir: 1 | -1) =>
-      setLightbox((i) => (i == null ? i : (i + dir + visible.length) % visible.length)),
+    (dir: 1 | -1) => {
+      setShot(0);
+      setLightbox((i) => (i == null ? i : (i + dir + visible.length) % visible.length));
+    },
     [visible.length],
   );
+  const open = useCallback((i: number) => {
+    setShot(0);
+    setLightbox(i);
+  }, []);
 
   useEffect(() => {
     if (lightbox == null) return;
@@ -192,6 +208,8 @@ export function ProjectGrid() {
   }, [lightbox, close, step]);
 
   const current = lightbox != null ? visible[lightbox] : null;
+  const shots = current ? [current.image, ...current.gallery] : [];
+  const activeShot = shots[Math.min(shot, shots.length - 1)] ?? current?.image;
   const preview = hovered != null ? visible[hovered] : null;
 
   return (
@@ -256,12 +274,12 @@ export function ProjectGrid() {
               data-card
               data-flip-id={p.slug}
               type="button"
-              onClick={() => setLightbox(i)}
+              onClick={() => open(i)}
               onPointerMove={tilt}
               onPointerLeave={untilt}
               className={cn(
                 "group border-border/60 bg-card relative overflow-hidden rounded-xl border text-left will-change-transform",
-                isFeature(i) ? "col-span-2 row-span-3" : "row-span-2",
+                tileClass(p, i),
               )}
             >
               <Image
@@ -269,7 +287,7 @@ export function ProjectGrid() {
                 alt={p.title}
                 fill
                 sizes={
-                  isFeature(i)
+                  i % 7 === 0
                     ? "(max-width: 640px) 100vw, 50vw"
                     : "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 }
@@ -291,7 +309,7 @@ export function ProjectGrid() {
                 <h3
                   className={cn(
                     "leading-snug transition-transform duration-500 group-hover:-translate-y-0.5 [--heading-weight:650]",
-                    isFeature(i) ? "text-lg sm:text-2xl" : "text-sm sm:text-base",
+                    i % 7 === 0 ? "text-lg sm:text-2xl" : "text-sm sm:text-base",
                   )}
                 >
                   {p.title}
@@ -324,7 +342,7 @@ export function ProjectGrid() {
               <li key={p.slug} data-card data-flip-id={p.slug}>
                 <button
                   type="button"
-                  onClick={() => setLightbox(i)}
+                  onClick={() => open(i)}
                   onPointerEnter={() => setHovered(i)}
                   onPointerLeave={() => setHovered(null)}
                   className="group border-border/50 relative grid w-full grid-cols-[2.5rem_1fr_5rem] items-center gap-4 border-b py-5 text-left lg:grid-cols-[3rem_1fr_12rem_7rem]"
@@ -412,7 +430,7 @@ export function ProjectGrid() {
           <figure className="max-h-full w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
             <div className="border-border/60 relative aspect-16/10 overflow-hidden rounded-xl border">
               <Image
-                src={current.image}
+                src={activeShot ?? current.image}
                 alt={current.title}
                 fill
                 sizes="100vw"
@@ -420,6 +438,28 @@ export function ProjectGrid() {
                 priority
               />
             </div>
+            {shots.length > 1 ? (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {shots.map((src, i) => (
+                  <button
+                    key={src}
+                    type="button"
+                    onClick={() => setShot(i)}
+                    aria-label={`Shot ${i + 1} of ${shots.length}`}
+                    aria-current={i === shot}
+                    className={cn(
+                      "relative h-12 w-20 overflow-hidden rounded border transition-opacity",
+                      i === shot
+                        ? "border-primary opacity-100"
+                        : "border-border/60 opacity-50 hover:opacity-90",
+                    )}
+                  >
+                    <Image src={src} alt="" fill sizes="80px" className="object-cover" />
+                  </button>
+                ))}
+              </div>
+            ) : null}
+
             <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-3">
               <p className="font-heading text-xl tracking-tight [--heading-weight:700]">
                 {current.title}

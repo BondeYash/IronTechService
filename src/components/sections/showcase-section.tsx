@@ -6,12 +6,12 @@ import { ShaderShowcase } from "@/components/three/shader-showcase";
 import { projects } from "@/data/projects";
 
 const featuredSlugs = [
+  "waupaca-foundry",
   "cooper-west-high-school",
+  "opportunity-bank",
   "sinclair-nursing-school",
+  "cal-eye-loma-linda",
   "maccray-public-school",
-  "publix-food-pharmacy-building",
-  "caleyeloma-linda",
-  "fort-peck-wellness-center",
 ];
 
 export function ShowcaseSection() {
@@ -35,7 +35,7 @@ export function ShowcaseSection() {
           />
           <Reveal delay={0.1}>
             <p className="text-muted-foreground mt-6 leading-relaxed text-pretty">
-              From a 28-ton surgery centre to a 700-ton high school, every package is modelled,
+              From a 25-ton retail shell to a 1,080-ton foundry, every package is modelled,
               checked and issued by the same in-house team. Hover the panel — it is a live WebGL
               surface, not a video.
             </p>
