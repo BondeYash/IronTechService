@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { ProjectPhoto } from "@/components/projects/project-photo";
 import { GraduationCap, Users, TrendingUp, Compass } from "lucide-react";
 import { PageHero } from "@/components/sections/page-hero";
 import { Reveal } from "@/components/motion/reveal";
@@ -91,13 +91,12 @@ export default function CareersPage() {
               </p>
             </Reveal>
             <Reveal from="scale" delay={0.15} className="mt-10">
-              <div className="border-border/60 relative aspect-4/3 overflow-hidden rounded-2xl border">
-                <Image
+              <div className="border-border/60 relative overflow-hidden rounded-2xl border bg-black">
+                <ProjectPhoto
                   src="/assets/images/stair2.jpg"
                   alt="Detailed steel stair"
-                  fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
             </Reveal>

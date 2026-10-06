@@ -1,5 +1,6 @@
 "use client";
 
+import { submissionDelivered } from "@/lib/submission-result";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,6 +29,11 @@ export function CareerForm() {
         body: JSON.stringify({ ...values, kind: "career" }),
       });
       if (!res.ok) throw new Error(`Request failed (${res.status})`);
+      if (!submissionDelivered(await res.json())) {
+        throw new Error(
+          "Email delivery is currently unavailable. Your details have not been sent. Please email us directly.",
+        );
+      }
       setSent(true);
       reset();
     } catch (err) {
@@ -37,7 +43,10 @@ export function CareerForm() {
 
   if (sent) {
     return (
-      <div className="border-primary/40 bg-primary/5 rounded-2xl border p-10 text-center">
+      <div
+        role="status"
+        className="border-primary/40 bg-primary/5 rounded-2xl border p-10 text-center"
+      >
         <CheckCircle2 className="text-primary mx-auto size-10" />
         <h3 className="mt-5 text-2xl [--heading-weight:700]">Application received</h3>
         <p className="text-muted-foreground mt-3 text-sm">
@@ -103,7 +112,14 @@ export function CareerForm() {
         className="pointer-events-none absolute -left-[9999px] size-0 opacity-0"
       />
 
-      {failed ? <p className="text-destructive text-sm">{failed}</p> : null}
+      {failed ? (
+        <p role="alert" className="text-destructive text-sm">
+          {failed}{" "}
+          <a className="underline" href={`mailto:${contact.email}`}>
+            {contact.email}
+          </a>
+        </p>
+      ) : null}
 
       <button
         type="submit"

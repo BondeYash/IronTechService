@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { KineticHeading } from "@/components/motion/kinetic-text";
-import { ShaderShowcase } from "@/components/three/shader-showcase";
+import { ProjectShowcase } from "@/components/projects/project-showcase";
 import { projects } from "@/data/projects";
 
 const featuredSlugs = [
@@ -17,14 +17,13 @@ const featuredSlugs = [
 export function ShowcaseSection() {
   const featured = featuredSlugs
     .map((slug) => projects.find((p) => p.slug === slug))
-    .filter((p): p is (typeof projects)[number] => Boolean(p))
-    .map((p) => ({ title: p.title, image: p.image, tonnage: p.tonnage }));
+    .filter((p): p is (typeof projects)[number] => Boolean(p));
 
   const items = featured.length ? featured : projects.slice(0, 6);
 
   return (
     <section className="relative py-28 lg:py-36">
-      <div className="container-x grid gap-14 lg:grid-cols-[1fr_1.25fr] lg:items-center lg:gap-20">
+      <div className="container-x grid grid-cols-1 gap-14 lg:grid-cols-[1fr_1.25fr] lg:items-center lg:gap-20">
         <div>
           <Reveal>
             <p className="eyebrow">Selected work</p>
@@ -35,9 +34,9 @@ export function ShowcaseSection() {
           />
           <Reveal delay={0.1}>
             <p className="text-muted-foreground mt-6 leading-relaxed text-pretty">
-              From a 25-ton retail shell to a 1,080-ton foundry, every package is modelled,
-              checked and issued by the same in-house team. Hover the panel — it is a live WebGL
-              surface, not a video.
+              From a 25-ton retail shell to a 1,080-ton foundry, every package is modelled, checked
+              and issued by the same in-house team. Open a project to inspect the complete image at
+              its original resolution.
             </p>
           </Reveal>
           <Reveal delay={0.15} className="mt-8">
@@ -51,8 +50,8 @@ export function ShowcaseSection() {
           </Reveal>
         </div>
 
-        <Reveal from="scale">
-          <ShaderShowcase items={items} />
+        <Reveal from="scale" className="min-w-0">
+          <ProjectShowcase items={items} />
         </Reveal>
       </div>
     </section>

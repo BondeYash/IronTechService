@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { ProjectPhoto } from "@/components/projects/project-photo";
 import { PageHero } from "@/components/sections/page-hero";
 import { Reveal } from "@/components/motion/reveal";
 import { WhyChooseUs } from "@/components/sections/why-choose-us";
@@ -7,11 +7,7 @@ import { CtaBand } from "@/components/sections/cta-band";
 import { about } from "@/data/content";
 import { site } from "@/data/site";
 import { sectors } from "@/data/services";
-import {
-  BadgeRow,
-  standardMarks,
-  softwareMarks,
-} from "@/components/ui/standard-badge";
+import { BadgeRow, standardMarks, softwareMarks } from "@/components/ui/standard-badge";
 import { stats } from "@/lib/stats";
 
 export const metadata: Metadata = {
@@ -45,13 +41,12 @@ export default function AboutPage() {
 
           <div className="space-y-8">
             <Reveal from="scale">
-              <div className="border-border/60 relative aspect-3/4 overflow-hidden rounded-2xl border">
-                <Image
+              <div className="border-border/60 relative overflow-hidden rounded-2xl border bg-black">
+                <ProjectPhoto
                   src="/assets/images/cooper-west-high-school700-tons.jpg"
                   alt="Cooper West High School steel frame, 700 tons detailed"
-                  fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
             </Reveal>

@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    qualities: [75, 85],
     formats: ["image/avif", "image/webp"],
     // Fewer generated variants means fewer cold optimizer round-trips on a
     // visitor's first request, which is where the wait was showing up.

@@ -1,0 +1,446 @@
+{
+  "/assets/images/1.png": {
+    "width": 1366,
+    "height": 550
+  },
+  "/assets/images/2.png": {
+    "width": 1366,
+    "height": 550
+  },
+  "/assets/images/3.png": {
+    "width": 1366,
+    "height": 450
+  },
+  "/assets/images/4.png": {
+    "width": 1366,
+    "height": 550
+  },
+  "/assets/images/5.png": {
+    "width": 1366,
+    "height": 450
+  },
+  "/assets/images/ascbuilding.png": {
+    "width": 650,
+    "height": 340
+  },
+  "/assets/images/bbtmartinsville35-tons.jpg": {
+    "width": 1833,
+    "height": 951
+  },
+  "/assets/images/becker-county150-tons.jpg": {
+    "width": 1835,
+    "height": 948
+  },
+  "/assets/images/caleyeloma-linda280-tons.jpg": {
+    "width": 1834,
+    "height": 954
+  },
+  "/assets/images/completion.png": {
+    "width": 1366,
+    "height": 450
+  },
+  "/assets/images/completion1.png": {
+    "width": 1366,
+    "height": 450
+  },
+  "/assets/images/cooper-west-high-school700-tons.jpg": {
+    "width": 1835,
+    "height": 844
+  },
+  "/assets/images/cooper-west-trusses.jpg": {
+    "width": 1839,
+    "height": 945
+  },
+  "/assets/images/crestmoor.jpg": {
+    "width": 1618,
+    "height": 990
+  },
+  "/assets/images/cvspharmacy40-tons.jpg": {
+    "width": 1835,
+    "height": 955
+  },
+  "/assets/images/d-qrri-rzn-ix1920section5.png": {
+    "width": 1200,
+    "height": 313
+  },
+  "/assets/images/download.jpg": {
+    "width": 1200,
+    "height": 675
+  },
+  "/assets/images/east-bank-firestation45-tons.jpg": {
+    "width": 1844,
+    "height": 953
+  },
+  "/assets/images/fort-peck-wellnesscenter165-tons.jpg": {
+    "width": 1817,
+    "height": 921
+  },
+  "/assets/images/ginger-coverails.jpg": {
+    "width": 1833,
+    "height": 990
+  },
+  "/assets/images/harris-teeter180-tons.jpg": {
+    "width": 1578,
+    "height": 1060
+  },
+  "/assets/images/image.png": {
+    "width": 2508,
+    "height": 1672
+  },
+  "/assets/images/maccray-publicschool-enrty.jpg": {
+    "width": 1625,
+    "height": 950
+  },
+  "/assets/images/maccray-publicschool250-tons.jpg": {
+    "width": 1834,
+    "height": 948
+  },
+  "/assets/images/maccrayentry-construction-photo.jpg": {
+    "width": 2560,
+    "height": 1703
+  },
+  "/assets/images/magothy-gateway.jpg": {
+    "width": 1306,
+    "height": 734
+  },
+  "/assets/images/magothy-gateway18-tons.jpg": {
+    "width": 1829,
+    "height": 958
+  },
+  "/assets/images/magothy-gateway2.jpg": {
+    "width": 960,
+    "height": 500
+  },
+  "/assets/images/namcc-addition125-tons.jpg": {
+    "width": 1836,
+    "height": 949
+  },
+  "/assets/images/new-precipitator125-tons.jpg": {
+    "width": 1236,
+    "height": 996
+  },
+  "/assets/images/opportunity-bank1725tons.jpg": {
+    "width": 1841,
+    "height": 953
+  },
+  "/assets/images/piccadilly-juban36-tons.jpg": {
+    "width": 1831,
+    "height": 984
+  },
+  "/assets/images/pinehurst-medical-clinic.jpg": {
+    "width": 640,
+    "height": 427
+  },
+  "/assets/images/pinehurst-medical-clinic100-tons.jpg": {
+    "width": 1826,
+    "height": 946
+  },
+  "/assets/images/pinehurst-surgical-center.webp": {
+    "width": 1200,
+    "height": 630
+  },
+  "/assets/images/projects/ala-lower-school-package-1-1.webp": {
+    "width": 1600,
+    "height": 829
+  },
+  "/assets/images/projects/ala-lower-school-package-2-1.webp": {
+    "width": 1600,
+    "height": 833
+  },
+  "/assets/images/projects/asc-building-1.webp": {
+    "width": 1600,
+    "height": 832
+  },
+  "/assets/images/projects/asc-building-2.webp": {
+    "width": 1600,
+    "height": 830
+  },
+  "/assets/images/projects/bais-medrash-1.webp": {
+    "width": 1600,
+    "height": 831
+  },
+  "/assets/images/projects/bank-first-national-1.webp": {
+    "width": 1600,
+    "height": 828
+  },
+  "/assets/images/projects/bb-t-martinsville-1.webp": {
+    "width": 1600,
+    "height": 832
+  },
+  "/assets/images/projects/bb-t-martinsville-2.webp": {
+    "width": 1600,
+    "height": 830
+  },
+  "/assets/images/projects/becker-county-1.webp": {
+    "width": 1600,
+    "height": 827
+  },
+  "/assets/images/projects/brevar-sci-1.webp": {
+    "width": 1600,
+    "height": 789
+  },
+  "/assets/images/projects/cal-eye-loma-linda-1.webp": {
+    "width": 1600,
+    "height": 832
+  },
+  "/assets/images/projects/cold-storage-facility-1.webp": {
+    "width": 1600,
+    "height": 868
+  },
+  "/assets/images/projects/cooper-west-high-school-1.webp": {
+    "width": 1600,
+    "height": 736
+  },
+  "/assets/images/projects/cooper-west-trusses-1.webp": {
+    "width": 1600,
+    "height": 822
+  },
+  "/assets/images/projects/crestmoor-1.webp": {
+    "width": 1600,
+    "height": 979
+  },
+  "/assets/images/projects/cvs-pharmacy-1.webp": {
+    "width": 1600,
+    "height": 833
+  },
+  "/assets/images/projects/dodge-city-1.webp": {
+    "width": 1600,
+    "height": 829
+  },
+  "/assets/images/projects/dumpster-enclosure-1.webp": {
+    "width": 1275,
+    "height": 750
+  },
+  "/assets/images/projects/east-bank-fire-station-1.webp": {
+    "width": 1600,
+    "height": 827
+  },
+  "/assets/images/projects/erected-frame-july-2024-1.webp": {
+    "width": 1600,
+    "height": 838
+  },
+  "/assets/images/projects/fort-peck-wellness-center-1.webp": {
+    "width": 1600,
+    "height": 811
+  },
+  "/assets/images/projects/ginger-cove-rails-1.webp": {
+    "width": 1600,
+    "height": 864
+  },
+  "/assets/images/projects/ladder-1.webp": {
+    "width": 588,
+    "height": 818
+  },
+  "/assets/images/projects/maccray-public-school-1.webp": {
+    "width": 1600,
+    "height": 827
+  },
+  "/assets/images/projects/magothy-gateway-1.webp": {
+    "width": 1600,
+    "height": 838
+  },
+  "/assets/images/projects/mane-tank-1.webp": {
+    "width": 1136,
+    "height": 812
+  },
+  "/assets/images/projects/muny-1.webp": {
+    "width": 1600,
+    "height": 812
+  },
+  "/assets/images/projects/namcc-addition-1.webp": {
+    "width": 1600,
+    "height": 827
+  },
+  "/assets/images/projects/new-precipitator-1.webp": {
+    "width": 1236,
+    "height": 996
+  },
+  "/assets/images/projects/opportunity-bank-1.webp": {
+    "width": 1600,
+    "height": 814
+  },
+  "/assets/images/projects/opportunity-bank-building-1-1.webp": {
+    "width": 1600,
+    "height": 828
+  },
+  "/assets/images/projects/piccadilly-juban-1.webp": {
+    "width": 1600,
+    "height": 860
+  },
+  "/assets/images/projects/pinehurst-medical-clinic-1.webp": {
+    "width": 1600,
+    "height": 829
+  },
+  "/assets/images/projects/publix-food-pharmacy-building-1-1.webp": {
+    "width": 1600,
+    "height": 899
+  },
+  "/assets/images/projects/publix-food-pharmacy-building-2-1.webp": {
+    "width": 1600,
+    "height": 753
+  },
+  "/assets/images/projects/publix-food-pharmacy-building-3-1.webp": {
+    "width": 1600,
+    "height": 794
+  },
+  "/assets/images/projects/red-lake-nations-studio-1.webp": {
+    "width": 1600,
+    "height": 803
+  },
+  "/assets/images/projects/rln-alternative-care-facility-1.webp": {
+    "width": 1600,
+    "height": 828
+  },
+  "/assets/images/projects/sample-stair-1.webp": {
+    "width": 1247,
+    "height": 901
+  },
+  "/assets/images/projects/sand-creek-1.webp": {
+    "width": 1600,
+    "height": 830
+  },
+  "/assets/images/projects/shipps-ladder-1.webp": {
+    "width": 671,
+    "height": 813
+  },
+  "/assets/images/projects/ski-lodge-1.webp": {
+    "width": 1600,
+    "height": 895
+  },
+  "/assets/images/projects/south-lake-houston-1.webp": {
+    "width": 1600,
+    "height": 834
+  },
+  "/assets/images/projects/stair-1-1.webp": {
+    "width": 1177,
+    "height": 984
+  },
+  "/assets/images/projects/stair-2-1.webp": {
+    "width": 1086,
+    "height": 962
+  },
+  "/assets/images/projects/stair-3-1.webp": {
+    "width": 593,
+    "height": 946
+  },
+  "/assets/images/projects/structural-model-july-2024-1.webp": {
+    "width": 1600,
+    "height": 880
+  },
+  "/assets/images/projects/surgery-center-1.webp": {
+    "width": 1600,
+    "height": 827
+  },
+  "/assets/images/projects/t-mobile-1.webp": {
+    "width": 1054,
+    "height": 705
+  },
+  "/assets/images/projects/tinsley-park-1.webp": {
+    "width": 1600,
+    "height": 790
+  },
+  "/assets/images/projects/tinsley-park-entry-1.webp": {
+    "width": 1600,
+    "height": 837
+  },
+  "/assets/images/projects/tinsley-park-rails-1.webp": {
+    "width": 1425,
+    "height": 777
+  },
+  "/assets/images/projects/vista-1.webp": {
+    "width": 1600,
+    "height": 836
+  },
+  "/assets/images/projects/waupaca-foundry-1.webp": {
+    "width": 1600,
+    "height": 827
+  },
+  "/assets/images/projects/westminster-retail-1.webp": {
+    "width": 1600,
+    "height": 835
+  },
+  "/assets/images/projects/wrightsville-beach-1.webp": {
+    "width": 1600,
+    "height": 831
+  },
+  "/assets/images/publix-food-pharmacy-building255-tons.jpg": {
+    "width": 1786,
+    "height": 840
+  },
+  "/assets/images/publix-food-pharmacy-building350-tons.jpg": {
+    "width": 1734,
+    "height": 860
+  },
+  "/assets/images/red-lake-nationsstudio60-tons.jpg": {
+    "width": 1824,
+    "height": 915
+  },
+  "/assets/images/rlnalternativecare-facility75-tons.jpg": {
+    "width": 1833,
+    "height": 949
+  },
+  "/assets/images/rtrpublicschool.jpg": {
+    "width": 420,
+    "height": 300
+  },
+  "/assets/images/shippsladder.jpg": {
+    "width": 671,
+    "height": 813
+  },
+  "/assets/images/sinclair-nursingschool600-tons.jpg": {
+    "width": 1740,
+    "height": 866
+  },
+  "/assets/images/sinclairschool.jpg": {
+    "width": 426,
+    "height": 921
+  },
+  "/assets/images/ski-lodge-plate-stair.jpg": {
+    "width": 1473,
+    "height": 927
+  },
+  "/assets/images/ski-lodge140-tons.jpg": {
+    "width": 1751,
+    "height": 980
+  },
+  "/assets/images/south-lake-houston80-tons.jpg": {
+    "width": 1837,
+    "height": 957
+  },
+  "/assets/images/stair2.jpg": {
+    "width": 1086,
+    "height": 962
+  },
+  "/assets/images/stair3.jpg": {
+    "width": 593,
+    "height": 946
+  },
+  "/assets/images/surgery-center28-tons.jpg": {
+    "width": 1835,
+    "height": 949
+  },
+  "/assets/images/tinsley-park-entry.jpg": {
+    "width": 1837,
+    "height": 945
+  },
+  "/assets/images/tinsley-park-rails.jpg": {
+    "width": 1425,
+    "height": 777
+  },
+  "/assets/images/tmobile30-ton.jpg": {
+    "width": 1054,
+    "height": 705
+  },
+  "/assets/images/waupaca-foundry-stair-railings.jpg": {
+    "width": 1835,
+    "height": 950
+  },
+  "/assets/images/x-qzi0-ff-cy7442image3.png": {
+    "width": 442,
+    "height": 450
+  },
+  "/assets/images/xq-bs1xb9-pc60coma.png": {
+    "width": 60,
+    "height": 44
+  }
+}

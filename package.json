@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test": "node --experimental-strip-types tests/improvements.test.mjs",
+    "images:audit": "node scripts/audit-project-images.mjs",
+    "images:check": "node scripts/audit-project-images.mjs --check"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

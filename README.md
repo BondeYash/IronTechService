@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Irontech Detailing website
 
-## Getting Started
+Public Next.js App Router website for Irontech Detailing Services Pvt Ltd. Pages: home, about, services, projects, careers and contact. Content lives in `src/data`; photographs live in `public/assets`.
 
-First, run the development server:
+## Local development
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Use Node 22.18+ for the included TypeScript-based Node tests (Next itself requires Node 20.9+). Install the locked dependencies with `npm ci`, then run `npm run dev`. The default address is http://localhost:3000.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `npm run lint` — ESLint.
+- `npm run type-check` — TypeScript (may update its incremental cache).
+- `npm test` — image fitting, form validation/delivery acknowledgement and cancelled audio startup tests; no network or email.
+- `npm run images:check` — verify metadata against the original files without changing them.
+- `npm run build`, then `npm start` — production build and local server. Google Fonts are downloaded during a fresh build. The form endpoint requires a Next-capable server, not a static-only host.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project photographs
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Images retain their native proportions and full composition. Cards use responsive optimized previews. The viewer loads only the selected original file, fits without upscaling, and offers zoom up to 100% with scrolling. Thumbnail frames use `contain`; captions sit outside photographs. The featured showcase no longer applies geometric or colour distortion to the client's imagery.
 
-## Learn More
+When adding or replacing photos, run `npm run images:audit` to regenerate `src/data/image-metadata.json`, then `npm run images:check` and `npm test`. The audit reads image metadata only and never rewrites image files. Keep `src/data/projects.ts` dimensions aligned. Do not infer tonnage or categories from an absent value.
 
-To learn more about Next.js, take a look at the following resources:
+The old `scrape/` scripts are historical migration utilities. They reference an obsolete `.scrape/` path and `gen.js` produces an older project schema. Do not run them against the maintained project archive.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Forms and email
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Both forms validate locally and on the server through shared Zod schemas. Optional quote scope accepts a blank selection. Success is shown only when the server explicitly confirms delivery; otherwise the filled form remains available with a direct email fallback.
 
-## Deploy on Vercel
+The existing endpoint reads `RESEND_API_KEY`, `ENQUIRY_TO`, and `ENQUIRY_FROM`. Provider configuration is intentionally deferred. Never use real customer information for local checks. To prevent external delivery in a local preview, launch with an explicitly empty `RESEND_API_KEY`; use isolated mock responses for submission tests. With no provider the existing endpoint logs submissions, so avoid sending personal data to it.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Browser regression checks
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check all six routes at desktop and mobile widths. In Projects, verify landscape and portrait cards, both layouts/filters, all photos within a project, fit/original/zoom controls, and small-source images that must not upscale. Check keyboard Tab/Shift+Tab containment, Escape, focus restoration, rapid open/close, and browser Back in both modal interfaces. Check the homepage showcase/photo wall, pause controls and reduced-motion preference. Toggle audio rapidly on/off and navigate between pages. Mock form responses for delivered, unavailable and server-error cases; do not send real email.
+
+No automated deployment configuration is committed here. Confirm hosting and production mail configuration separately.

@@ -3,16 +3,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { nav, site, contact } from "@/data/site";
 import { AudioToggle } from "@/components/audio/audio-toggle";
+import { useModalDialog } from "@/lib/use-modal-dialog";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const close = useCallback(() => setOpen(false), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -23,13 +25,6 @@ export function SiteHeader() {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
 
   return (
     <>
@@ -106,6 +101,7 @@ export function SiteHeader() {
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
+              aria-controls="mobile-navigation"
               className="border-border/70 hover:border-primary/60 rounded-full border p-2.5 transition lg:hidden"
             >
               {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -114,40 +110,70 @@ export function SiteHeader() {
         </div>
       </header>
 
-      {/* Mobile sheet */}
-      <div
-        className={cn(
-          "fixed inset-0 z-40 flex flex-col justify-between px-6 pt-28 pb-10 transition-all duration-500 lg:hidden",
-          "bg-background/95 backdrop-blur-xl",
-          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
-        )}
-      >
-        <nav className="flex flex-col">
-          {nav.map((item, i) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="border-border/50 font-heading hover:text-primary flex items-baseline justify-between border-b py-5 text-3xl tracking-tight transition-colors [--heading-weight:700]"
-              style={{ transitionDelay: `${i * 30}ms` }}
-            >
-              {item.label}
-              <span className="text-muted-foreground font-mono text-xs">0{i + 1}</span>
-            </Link>
-          ))}
-        </nav>
-        <div className="space-y-4">
-          <AudioToggle className="w-fit" />
-          <div className="text-muted-foreground space-y-1 font-mono text-sm">
-            <a href={`mailto:${contact.email}`} className="hover:text-primary block">
-              {contact.email}
-            </a>
-            <a href={contact.phoneHref} className="hover:text-primary block">
-              {contact.phone}
-            </a>
-          </div>
+      {open && <MobileMenu onClose={close} />}
+    </>
+  );
+}
+
+function MobileMenu({ onClose }: { onClose: () => void }) {
+  const dialog = useModalDialog(onClose);
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const onChange = () => {
+      if (desktop.matches) onClose();
+    };
+    desktop.addEventListener("change", onChange);
+    return () => desktop.removeEventListener("change", onChange);
+  }, [onClose]);
+  return (
+    <dialog
+      ref={dialog}
+      id="mobile-navigation"
+      aria-label="Main navigation"
+      data-lenis-prevent
+      className="bg-background text-foreground fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-y-auto border-0 px-6 py-6 backdrop:bg-black/80"
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
+    >
+      <div className="mb-6 flex items-center justify-between">
+        <span className="font-heading text-xl">IRONTECH</span>
+        <button
+          type="button"
+          data-dialog-close
+          autoFocus
+          onClick={onClose}
+          aria-label="Close menu"
+          className="border-border focus-visible:outline-primary rounded-full border p-3 focus-visible:outline-2"
+        >
+          <X className="size-5" />
+        </button>
+      </div>
+      <nav className="flex flex-col" aria-label="Mobile navigation">
+        {nav.map((item, i) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            onClick={onClose}
+            className="border-border/50 font-heading hover:text-primary focus-visible:outline-primary flex items-baseline justify-between border-b py-4 text-2xl focus-visible:outline-2"
+          >
+            {item.label}
+            <span className="text-muted-foreground font-mono text-xs">0{i + 1}</span>
+          </Link>
+        ))}
+      </nav>
+      <div className="mt-8 space-y-4">
+        <AudioToggle className="w-fit" />
+        <div className="text-muted-foreground space-y-2 text-sm">
+          <a href={`mailto:${contact.email}`} className="block">
+            {contact.email}
+          </a>
+          <a href={contact.phoneHref} className="block">
+            {contact.phone}
+          </a>
         </div>
       </div>
-    </>
+    </dialog>
   );
 }

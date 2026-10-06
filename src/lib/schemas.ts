@@ -5,7 +5,7 @@ export const enquirySchema = z.object({
   email: z.string().email("A valid email, please"),
   company: z.string().optional(),
   phone: z.string().optional(),
-  scope: z.enum(["structural", "miscellaneous", "both", "other"]).optional(),
+  scope: z.enum(["structural", "miscellaneous", "both", "other"]).or(z.literal("")).optional(),
   tonnage: z.string().optional(),
   message: z.string().min(10, "A sentence or two about the project"),
   // honeypot: real people leave this empty

@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
  * Silent by default: a B2B visitor should never be ambushed by sound.
  */
 export function AudioToggle({ className }: { className?: string }) {
-  const { enabled, ready, toggle, spectrum } = useAudio();
+  const { enabled, ready, error, toggle, spectrum } = useAudio();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pageVisible = usePageVisible();
 
@@ -72,6 +72,7 @@ export function AudioToggle({ className }: { className?: string }) {
     <button
       type="button"
       onClick={toggle}
+      title={error ?? (enabled && !ready ? "Starting sound…" : undefined)}
       aria-pressed={enabled}
       aria-label={enabled ? "Mute ambient sound" : "Play ambient sound"}
       className={cn(
@@ -87,7 +88,7 @@ export function AudioToggle({ className }: { className?: string }) {
       )}
       <canvas ref={canvasRef} className="h-4 w-14" aria-hidden />
       <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase opacity-70">
-        {enabled ? "On" : "Sound"}
+        {error ? "Retry sound" : enabled ? (ready ? "On" : "Starting…") : "Sound"}
       </span>
     </button>
   );

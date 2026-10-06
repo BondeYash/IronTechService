@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { ProjectPhoto } from "@/components/projects/project-photo";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal, Parallax } from "@/components/motion/reveal";
@@ -12,27 +12,24 @@ export function AboutSection() {
       <div className="container-x grid gap-16 lg:grid-cols-2 lg:gap-24">
         <div className="relative">
           <Reveal from="scale" className="relative">
-            <div className="border-border/60 relative aspect-4/5 overflow-hidden rounded-2xl border">
-              <Image
+            <div className="border-border/60 relative overflow-hidden rounded-2xl border bg-black">
+              <ProjectPhoto
                 src="/assets/images/cooper-west-trusses.jpg"
                 alt="Fabricated steel trusses detailed by Irontech"
-                fill
                 sizes="(max-width: 1024px) 100vw, 45vw"
-                className="object-cover"
+                className="object-contain"
               />
-              <div className="from-background/80 absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
             </div>
           </Reveal>
 
-          <Parallax amount={60} className="absolute -right-4 -bottom-12 w-44 sm:w-56">
+          <Parallax amount={60} className="mt-4 ml-auto w-44 sm:w-56">
             <div className="border-border/60 glass overflow-hidden rounded-xl border p-1.5">
-              <div className="relative aspect-square overflow-hidden rounded-lg">
-                <Image
+              <div className="relative overflow-hidden rounded-lg">
+                <ProjectPhoto
                   src="/assets/images/ski-lodge-plate-stair.jpg"
                   alt="Plate stair detail"
-                  fill
                   sizes="220px"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
               <p className="text-muted-foreground px-2 py-2 font-mono text-[0.58rem] tracking-[0.18em] uppercase">

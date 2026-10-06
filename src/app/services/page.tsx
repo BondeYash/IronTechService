@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { ProjectPhoto } from "@/components/projects/project-photo";
 import { Check } from "lucide-react";
 import { PageHero } from "@/components/sections/page-hero";
 import { Reveal, Parallax } from "@/components/motion/reveal";
@@ -7,11 +7,7 @@ import { KineticHeading } from "@/components/motion/kinetic-text";
 import { ServicesSection } from "@/components/sections/services-section";
 import { CtaBand } from "@/components/sections/cta-band";
 import { servicesPage, deliverables, sectors } from "@/data/services";
-import {
-  BadgeRow,
-  standardMarks,
-  softwareMarks,
-} from "@/components/ui/standard-badge";
+import { BadgeRow, standardMarks, softwareMarks } from "@/components/ui/standard-badge";
 
 export const metadata: Metadata = {
   title: "Our Services",
@@ -73,15 +69,13 @@ export default function ServicesPage() {
 
           <div className="space-y-6">
             <Parallax amount={40}>
-              <div className="border-border/60 relative aspect-4/5 overflow-hidden rounded-2xl border">
-                <Image
+              <div className="border-border/60 relative overflow-hidden rounded-2xl border bg-black">
+                <ProjectPhoto
                   src="/assets/images/sinclair-nursingschool600-tons.jpg"
                   alt="Sinclair Nursing School steel package, 600 tons detailed"
-                  fill
                   sizes="(max-width: 1024px) 100vw, 42vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
-                <div className="from-background/70 absolute inset-0 bg-gradient-to-t to-transparent" />
               </div>
             </Parallax>
             <Reveal className="space-y-6">

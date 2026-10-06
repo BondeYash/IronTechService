@@ -10,11 +10,14 @@ import {
   useState,
 } from "react";
 
+import { startDisposable } from "@/lib/async-disposable";
+
 type ToneModule = typeof import("tone");
 
 type AudioApi = {
   enabled: boolean;
   ready: boolean;
+  error: string | null;
   toggle: () => void;
   /** 0..1 smoothed loudness, read from a ref to avoid re-renders */
   energy: React.RefObject<number>;
@@ -35,25 +38,27 @@ const AudioContextValue = createContext<AudioApi | null>(null);
 export function AudioProvider({ children }: { children: React.ReactNode }) {
   const [enabled, setEnabled] = useState(false);
   const [ready, setReady] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const enabledRef = useRef(false);
+  const cancelRef = useRef<(() => void) | null>(null);
   const energy = useRef(0);
   const spectrum = useRef<Float32Array | null>(null);
   const rafRef = useRef(0);
   const toneRef = useRef<ToneModule | null>(null);
-  const nodesRef = useRef<{ dispose: () => void } | null>(null);
-
   const stop = useCallback(() => {
-    cancelAnimationFrame(rafRef.current);
-    nodesRef.current?.dispose();
-    nodesRef.current = null;
+    cancelRef.current?.();
+    cancelRef.current = null;
     energy.current = 0;
     spectrum.current = null;
-    setReady(false);
   }, []);
 
-  const start = useCallback(async () => {
+  const start = useCallback(async (signal: AbortSignal) => {
+    signal.throwIfAborted();
     const Tone = toneRef.current ?? (await import("tone"));
     toneRef.current = Tone;
+    signal.throwIfAborted();
     await Tone.start();
+    signal.throwIfAborted();
 
     const meter = new Tone.Meter({ smoothing: 0.85 });
     const analyser = new Tone.Analyser("fft", 32);
@@ -71,9 +76,9 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
       harmonicity: 1.5,
     }).connect(filter);
 
-    const air = new Tone.Noise("pink").connect(
-      new Tone.Filter(900, "bandpass").connect(new Tone.Gain(0.05).connect(reverb)),
-    );
+    const airGain = new Tone.Gain(0.05).connect(reverb);
+    const airFilter = new Tone.Filter(900, "bandpass").connect(airGain);
+    const air = new Tone.Noise("pink").connect(airFilter);
 
     const strike = new Tone.MetalSynth({
       volume: -34,
@@ -94,8 +99,9 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     loop.start(0);
     Tone.getTransport().start();
 
-    nodesRef.current = {
+    const resource = {
       dispose: () => {
+        cancelAnimationFrame(rafRef.current);
         loop.stop();
         loop.dispose();
         Tone.getTransport().stop();
@@ -103,6 +109,8 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
         drone.dispose();
         air.stop();
         air.dispose();
+        airFilter.dispose();
+        airGain.dispose();
         strike.dispose();
         filter.dispose();
         reverb.dispose();
@@ -122,23 +130,41 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
-    setReady(true);
+    return resource;
   }, []);
 
   const toggle = useCallback(() => {
-    setEnabled((prev) => {
-      const next = !prev;
-      if (next) void start();
-      else stop();
-      return next;
-    });
+    const next = !enabledRef.current;
+    enabledRef.current = next;
+    stop();
+    setEnabled(next);
+    setReady(false);
+    setError(null);
+    if (next) {
+      cancelRef.current = startDisposable(
+        start,
+        () => setReady(true),
+        () => {
+          enabledRef.current = false;
+          setEnabled(false);
+          setReady(false);
+          setError("Sound could not start. Try again.");
+        },
+      );
+    }
   }, [start, stop]);
 
-  useEffect(() => () => stop(), [stop]);
+  useEffect(
+    () => () => {
+      enabledRef.current = false;
+      stop();
+    },
+    [stop],
+  );
 
   const value = useMemo<AudioApi>(
-    () => ({ enabled, ready, toggle, energy, spectrum }),
-    [enabled, ready, toggle],
+    () => ({ enabled, ready, error, toggle, energy, spectrum }),
+    [enabled, ready, error, toggle],
   );
 
   return <AudioContextValue.Provider value={value}>{children}</AudioContextValue.Provider>;
@@ -149,6 +175,7 @@ export function useAudio(): AudioApi {
     useContext(AudioContextValue) ?? {
       enabled: false,
       ready: false,
+      error: null,
       toggle: () => {},
       energy: noopEnergy,
       spectrum: noopSpectrum,

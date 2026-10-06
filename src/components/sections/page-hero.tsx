@@ -27,7 +27,7 @@ export function PageHero({
             fill
             sizes="100vw"
             priority
-            className="object-cover opacity-25"
+            className="object-contain opacity-25"
           />
           <div className="from-background via-background/85 to-background absolute inset-0 bg-gradient-to-b" />
         </div>

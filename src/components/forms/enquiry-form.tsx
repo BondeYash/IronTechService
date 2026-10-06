@@ -1,10 +1,12 @@
 "use client";
 
+import { submissionDelivered } from "@/lib/submission-result";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { enquirySchema, type EnquiryInput } from "@/lib/schemas";
+import { contact } from "@/data/site";
 import { Field, inputClass } from "./form-field";
 
 export function EnquiryForm() {
@@ -27,6 +29,11 @@ export function EnquiryForm() {
         body: JSON.stringify({ ...values, kind: "enquiry" }),
       });
       if (!res.ok) throw new Error(`Request failed (${res.status})`);
+      if (!submissionDelivered(await res.json())) {
+        throw new Error(
+          "Email delivery is currently unavailable. Your details have not been sent. Please email us directly.",
+        );
+      }
       setSent(true);
       reset();
     } catch (err) {
@@ -36,7 +43,10 @@ export function EnquiryForm() {
 
   if (sent) {
     return (
-      <div className="border-primary/40 bg-primary/5 rounded-2xl border p-10 text-center">
+      <div
+        role="status"
+        className="border-primary/40 bg-primary/5 rounded-2xl border p-10 text-center"
+      >
         <CheckCircle2 className="text-primary mx-auto size-10" />
         <h3 className="mt-5 text-2xl [--heading-weight:700]">Enquiry received</h3>
         <p className="text-muted-foreground mt-3 text-sm">
@@ -125,7 +135,14 @@ export function EnquiryForm() {
         className="pointer-events-none absolute -left-[9999px] size-0 opacity-0"
       />
 
-      {failed ? <p className="text-destructive text-sm">{failed}</p> : null}
+      {failed ? (
+        <p role="alert" className="text-destructive text-sm">
+          {failed}{" "}
+          <a className="underline" href={`mailto:${contact.email}`}>
+            {contact.email}
+          </a>
+        </p>
+      ) : null}
 
       <button
         type="submit"
