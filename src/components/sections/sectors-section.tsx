@@ -21,9 +21,8 @@ export function SectorsSection() {
           </div>
           <Reveal delay={0.1}>
             <p className="text-muted-foreground max-w-sm text-sm leading-relaxed">
-              Every figure below is counted from packages already detailed and
-              issued — schools and hospitals through to foundry platforms and
-              stair cores.
+              Every figure below is counted from packages already detailed and issued — schools and
+              hospitals through to foundry platforms and stair cores.
             </p>
           </Reveal>
         </div>
@@ -51,17 +50,13 @@ export function SectorsSection() {
 
               <div className="relative">
                 <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="text-xl [--heading-weight:700]">
-                    {sector.label}
-                  </h3>
+                  <h3 className="text-xl [--heading-weight:700]">{sector.label}</h3>
                   <span className="text-primary font-mono text-[0.68rem] tracking-[0.16em] uppercase">
                     {sector.count} jobs
                   </span>
                 </div>
 
-                <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
-                  {sector.blurb}
-                </p>
+                <p className="text-muted-foreground mt-3 text-sm leading-relaxed">{sector.blurb}</p>
 
                 <ul className="border-border/60 mt-5 space-y-1.5 border-t pt-4">
                   {sector.samples.map((p) => (
