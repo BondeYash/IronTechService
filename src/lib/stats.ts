@@ -1,7 +1,5 @@
 import { projects } from "@/data/projects";
 
-const tonnages = projects.map((p) => p.tonnage).filter((t): t is number => typeof t === "number");
-
 /** Packages with photography on the site. */
 export const publishedProjects = projects.length;
 
@@ -11,11 +9,12 @@ export const publishedProjects = projects.length;
  * figure is the client's own count, the browsable grid stays honest about
  * what it can actually show.
  */
-export const deliveredPackages = 80;
+export const deliveredPackages = 400;
 
 export const projectCount = publishedProjects;
-export const totalTonnage = Math.round(tonnages.reduce((a, b) => a + b, 0));
-export const largestTonnage = Math.max(...tonnages);
+// Client-provided figures across all delivered work.
+export const totalTonnage = 30000;
+export const largestTonnage = 2200;
 
 export const stats = [
   { value: deliveredPackages, suffix: "+", label: "Projects detailed" },
