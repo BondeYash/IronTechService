@@ -12,7 +12,7 @@ export function AboutSection() {
       <div className="container-x grid gap-16 lg:grid-cols-2 lg:gap-24">
         <div className="relative">
           <Reveal from="scale" className="relative">
-            <div className="border-border/60 relative overflow-hidden rounded-2xl border bg-black">
+            <div className="border-border/60 bg-muted relative overflow-hidden rounded-2xl border">
               <ProjectPhoto
                 src="/assets/images/cooper-west-trusses.jpg"
                 alt="Fabricated steel trusses detailed by Irontech"

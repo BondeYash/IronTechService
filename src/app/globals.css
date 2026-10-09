@@ -35,23 +35,11 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
 
-  /* brand scales */
-  --color-molten-50: oklch(0.97 0.03 70);
-  --color-molten-200: oklch(0.9 0.09 68);
-  --color-molten-400: oklch(0.79 0.16 60);
-  --color-molten-500: oklch(0.72 0.19 55);
-  --color-molten-600: oklch(0.64 0.19 47);
-  --color-molten-700: oklch(0.53 0.17 42);
-  --color-arc-100: oklch(0.95 0.03 215);
-  --color-arc-300: oklch(0.85 0.09 225);
-  --color-arc-500: oklch(0.72 0.14 240);
-  --color-steel-50: oklch(0.97 0.004 250);
-  --color-steel-200: oklch(0.86 0.008 250);
-  --color-steel-400: oklch(0.63 0.012 250);
-  --color-steel-600: oklch(0.42 0.014 250);
-  --color-steel-800: oklch(0.24 0.012 250);
-  --color-steel-900: oklch(0.17 0.01 250);
-  --color-steel-950: oklch(0.12 0.008 250);
+  /* Violet-blue accents on clean white surfaces. */
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
 
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -62,61 +50,70 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* Dark is the shipped default: an industrial, graphite-and-molten identity. */
-:root,
-.dark {
-  --background: oklch(0.13 0.008 250);
-  --foreground: oklch(0.96 0.004 250);
-  --card: oklch(0.17 0.01 250);
-  --card-foreground: oklch(0.96 0.004 250);
-  --popover: oklch(0.17 0.01 250);
-  --popover-foreground: oklch(0.96 0.004 250);
-  --primary: oklch(0.72 0.19 55);
-  --primary-foreground: oklch(0.16 0.02 50);
-  --secondary: oklch(0.24 0.012 250);
-  --secondary-foreground: oklch(0.96 0.004 250);
-  --muted: oklch(0.21 0.01 250);
-  --muted-foreground: oklch(0.68 0.012 250);
-  --accent: oklch(0.26 0.02 250);
-  --accent-foreground: oklch(0.96 0.004 250);
-  --destructive: oklch(0.63 0.2 25);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.72 0.19 55);
+:root {
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #24243a;
+  --card: #ffffff;
+  --card-foreground: #24243a;
+  --popover: #ffffff;
+  --popover-foreground: #24243a;
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --secondary: #f0efff;
+  --secondary-foreground: #24243a;
+  --muted: #f8f8fc;
+  --muted-foreground: #606078;
+  --accent: #eeedff;
+  --accent-foreground: #4338ca;
+  --destructive: #b42332;
+  --border: #e0dfed;
+  --input: #c8c6dc;
+  --ring: #4f46e5;
   --radius: 0.5rem;
-  --sidebar: oklch(0.17 0.01 250);
-  --sidebar-foreground: oklch(0.96 0.004 250);
-  --sidebar-primary: oklch(0.72 0.19 55);
-  --sidebar-primary-foreground: oklch(0.16 0.02 50);
-  --sidebar-accent: oklch(0.24 0.012 250);
-  --sidebar-accent-foreground: oklch(0.96 0.004 250);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.72 0.19 55);
+  --sidebar: #f8f8fc;
+  --sidebar-foreground: #24243a;
+  --sidebar-primary: #4f46e5;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eeedff;
+  --sidebar-accent-foreground: #4338ca;
+  --sidebar-border: #e0dfed;
+  --sidebar-ring: #4f46e5;
 
-  --grid-line: oklch(1 0 0 / 6%);
-  --surface-glass: oklch(0.19 0.01 250 / 55%);
+  --grid-line: rgb(79 70 229 / 4%);
+  --surface-glass: rgb(255 255 255 / 92%);
 }
 
-.light {
-  --background: oklch(0.98 0.003 250);
-  --foreground: oklch(0.17 0.01 250);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.17 0.01 250);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.17 0.01 250);
-  --primary: oklch(0.58 0.18 45);
-  --primary-foreground: oklch(0.99 0.005 60);
-  --secondary: oklch(0.94 0.005 250);
-  --secondary-foreground: oklch(0.2 0.01 250);
-  --muted: oklch(0.95 0.004 250);
-  --muted-foreground: oklch(0.48 0.012 250);
-  --accent: oklch(0.93 0.008 250);
-  --accent-foreground: oklch(0.2 0.01 250);
-  --border: oklch(0.17 0.01 250 / 12%);
-  --input: oklch(0.17 0.01 250 / 16%);
-  --ring: oklch(0.58 0.18 45);
-  --grid-line: oklch(0.17 0.01 250 / 8%);
-  --surface-glass: oklch(1 0 0 / 70%);
+.dark {
+  color-scheme: dark;
+  --background: #11111c;
+  --foreground: #f1f0ff;
+  --card: #191928;
+  --card-foreground: #f1f0ff;
+  --popover: #191928;
+  --popover-foreground: #f1f0ff;
+  --primary: #9b95ff;
+  --primary-foreground: #15142b;
+  --secondary: #242338;
+  --secondary-foreground: #f1f0ff;
+  --muted: #1b1b2b;
+  --muted-foreground: #b5b4cd;
+  --accent: #2b2847;
+  --accent-foreground: #f1f0ff;
+  --destructive: #ff8997;
+  --border: #34334c;
+  --input: #46445e;
+  --ring: #9b95ff;
+  --sidebar: #191928;
+  --sidebar-foreground: #f1f0ff;
+  --sidebar-primary: #9b95ff;
+  --sidebar-primary-foreground: #15142b;
+  --sidebar-accent: #2b2847;
+  --sidebar-accent-foreground: #f1f0ff;
+  --sidebar-border: #34334c;
+  --sidebar-ring: #9b95ff;
+  --grid-line: rgb(155 149 255 / 8%);
+  --surface-glass: rgb(25 25 40 / 92%);
 }
 
 @layer base {
@@ -143,8 +140,8 @@
     text-wrap: balance;
   }
   ::selection {
-    background: var(--color-molten-500);
-    color: oklch(0.15 0.02 50);
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
   /* Lenis */
   html.lenis,
@@ -180,16 +177,6 @@
       linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
     background-size: 72px 72px;
   }
-  /* A 736px box behind a 140px blur filter is a real raster cost on first
-     paint; the same glow as a gradient is free. */
-  .hero-glow {
-    background: radial-gradient(
-      circle at center,
-      color-mix(in oklab, var(--color-molten-500) 22%, transparent) 0%,
-      color-mix(in oklab, var(--color-molten-600) 9%, transparent) 42%,
-      transparent 70%
-    );
-  }
   /* Skips layout and paint for sections that are off screen. Only used where
      the height is stable, so the scrollbar never jumps. */
   .cv-auto {
@@ -202,35 +189,9 @@
   }
 }
 
-/* Gradient headings paint the glyphs of each animated word span, not the
-   block: KineticHeading wraps every word in an overflow-hidden span, and
-   background-clip on the heading itself would clip to the box instead. */
-.molten-text,
-.molten-text [data-word-inner] {
-  background: linear-gradient(
-    100deg,
-    var(--color-molten-200),
-    var(--color-molten-500) 45%,
-    var(--color-molten-700)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Arc blue — the cool counterpart to the molten accent, used where a large
-   headline would otherwise flood the viewport with orange. */
-.arc-text,
-.arc-text [data-word-inner] {
-  background: linear-gradient(
-    100deg,
-    var(--color-arc-100),
-    var(--color-arc-300) 45%,
-    var(--color-arc-500)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.brand-text,
+.brand-text [data-word-inner] {
+  color: var(--primary);
 }
 
 /* GSAP reveal primitives: hidden until the client marks them ready, so

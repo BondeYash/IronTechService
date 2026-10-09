@@ -69,7 +69,7 @@ export default function ServicesPage() {
 
           <div className="space-y-6">
             <Parallax amount={40}>
-              <div className="border-border/60 relative overflow-hidden rounded-2xl border bg-black">
+              <div className="border-border/60 bg-muted relative overflow-hidden rounded-2xl border">
                 <ProjectPhoto
                   src="/assets/images/sinclair-nursingschool600-tons.jpg"
                   alt="Sinclair Nursing School steel package, 600 tons detailed"

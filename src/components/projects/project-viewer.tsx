@@ -103,7 +103,7 @@ function ImageViewport({ src, title }: { src: string; title: string }) {
             : "Project image, fitted to screen"
         }
         data-enlarged={enlarged}
-        className="focus-visible:outline-primary relative min-h-0 flex-1 overflow-auto overscroll-contain rounded-lg bg-black focus-visible:outline-2"
+        className="focus-visible:outline-primary bg-muted relative min-h-0 flex-1 overflow-auto overscroll-contain rounded-lg focus-visible:outline-2"
       >
         {(!loaded || failed) && (
           <p role="status" className="absolute inset-x-0 top-4 z-10 text-center text-sm">
@@ -174,7 +174,7 @@ export function ProjectViewer({
       ref={dialog}
       aria-labelledby="project-viewer-title"
       data-lenis-prevent
-      className="bg-background text-foreground fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none border-0 p-3 backdrop:bg-black/80 sm:p-6"
+      className="bg-background text-foreground backdrop:bg-foreground/40 fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none border-0 p-3 sm:p-6"
       onCancel={(event) => {
         event.preventDefault();
         onClose();
@@ -244,7 +244,7 @@ export function ProjectViewer({
                 aria-label={`Show image ${i + 1} of ${shots.length}`}
                 aria-pressed={i === shot}
                 className={cn(
-                  "focus-visible:outline-primary relative h-12 w-20 shrink-0 rounded border bg-black focus-visible:outline-2",
+                  "focus-visible:outline-primary bg-muted relative h-12 w-20 shrink-0 rounded border focus-visible:outline-2",
                   i === shot ? "border-primary" : "border-border",
                 )}
               >

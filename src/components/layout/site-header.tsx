@@ -6,9 +6,9 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { nav, site, contact } from "@/data/site";
-import { AudioToggle } from "@/components/audio/audio-toggle";
 import { useModalDialog } from "@/lib/use-modal-dialog";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -38,32 +38,29 @@ export function SiteHeader() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-          scrolled ? "glass border-border/60 border-b py-2" : "border-b border-transparent py-4",
+          scrolled
+            ? "border-border glass border-b py-2 shadow-sm"
+            : "border-border bg-background/95 border-b py-3",
         )}
       >
-        <div className="container-x flex items-center justify-between gap-6">
-          <Link href="/" className="group flex items-center gap-3">
-            <span className="ring-primary/30 group-hover:ring-primary/70 relative size-10 overflow-hidden rounded-md ring-1 transition">
+        <div className="container-x flex items-center justify-between gap-3 xl:gap-6">
+          <Link href="/" className="group flex min-w-0 items-center gap-2.5 sm:gap-3">
+            <span className="relative h-10 w-12 shrink-0 sm:h-12 sm:w-14">
               <Image
                 src={site.logo}
                 alt={`${site.name} logo`}
                 fill
-                sizes="40px"
-                className="object-cover"
+                sizes="(min-width: 640px) 56px, 48px"
+                className="object-contain"
                 priority
               />
             </span>
-            <span className="hidden leading-none sm:block">
-              <span className="font-heading block text-sm tracking-tight [--heading-weight:800]">
-                IRONTECH
-              </span>
-              <span className="text-muted-foreground font-mono text-[0.58rem] tracking-[0.22em] uppercase">
-                Steel Detailing
-              </span>
+            <span className="font-heading text-foreground max-w-[12rem] text-[0.78rem] leading-snug font-bold sm:text-sm">
+              {site.name}
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:flex">
             {nav.map((item) => {
               const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
               return (
@@ -87,11 +84,11 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <div className="flex items-center gap-3">
-            <AudioToggle className="hidden md:flex" />
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <ThemeToggle />
             <Link
               href="/contact"
-              className="bg-primary text-primary-foreground hover:bg-molten-400 hidden items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors sm:inline-flex"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 hidden items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium whitespace-nowrap transition-colors sm:inline-flex"
             >
               Request a quote
               <ArrowUpRight className="size-4" />
@@ -102,7 +99,7 @@ export function SiteHeader() {
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               aria-controls="mobile-navigation"
-              className="border-border/70 hover:border-primary/60 rounded-full border p-2.5 transition lg:hidden"
+              className="border-border/70 hover:border-primary/60 shrink-0 rounded-full border p-2.5 transition xl:hidden"
             >
               {open ? <X className="size-5" /> : <Menu className="size-5" />}
             </button>
@@ -118,7 +115,7 @@ export function SiteHeader() {
 function MobileMenu({ onClose }: { onClose: () => void }) {
   const dialog = useModalDialog(onClose);
   useEffect(() => {
-    const desktop = window.matchMedia("(min-width: 1024px)");
+    const desktop = window.matchMedia("(min-width: 1280px)");
     const onChange = () => {
       if (desktop.matches) onClose();
     };
@@ -131,14 +128,14 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
       id="mobile-navigation"
       aria-label="Main navigation"
       data-lenis-prevent
-      className="bg-background text-foreground fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-y-auto border-0 px-6 py-6 backdrop:bg-black/80"
+      className="bg-background text-foreground backdrop:bg-foreground/40 fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-y-auto border-0 px-6 py-6"
       onCancel={(event) => {
         event.preventDefault();
         onClose();
       }}
     >
       <div className="mb-6 flex items-center justify-between">
-        <span className="font-heading text-xl">IRONTECH</span>
+        <span className="font-heading max-w-56 text-lg leading-snug font-bold">{site.name}</span>
         <button
           type="button"
           data-dialog-close
@@ -164,7 +161,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
         ))}
       </nav>
       <div className="mt-8 space-y-4">
-        <AudioToggle className="w-fit" />
+        <ThemeToggle showLabel />
         <div className="text-muted-foreground space-y-2 text-sm">
           <a href={`mailto:${contact.email}`} className="block">
             {contact.email}

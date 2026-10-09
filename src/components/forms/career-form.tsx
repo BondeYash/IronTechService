@@ -124,7 +124,7 @@ export function CareerForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="group bg-primary text-primary-foreground hover:bg-molten-400 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium transition-colors disabled:opacity-60"
+        className="group bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium transition-colors disabled:opacity-60"
       >
         {isSubmitting ? (
           <Loader2 className="size-4 animate-spin" />

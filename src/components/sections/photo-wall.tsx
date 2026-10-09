@@ -72,7 +72,7 @@ function Row({
             tabIndex={index >= items.length ? -1 : 0}
             className="border-border bg-card hover:border-primary focus-visible:outline-primary w-64 shrink-0 overflow-hidden rounded-lg border text-left focus-visible:outline-2 sm:w-80"
           >
-            <span className="relative block h-44 bg-black sm:h-48">
+            <span className="bg-muted relative block h-44 sm:h-48">
               <Image
                 src={item.image}
                 alt=""

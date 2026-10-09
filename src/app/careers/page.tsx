@@ -33,7 +33,7 @@ const perks = [
   {
     icon: Compass,
     title: "Work to standards",
-    body: "Every drawing you produce is measured against AISC, NISD and OSHA guidance.",
+    body: "Every drawing you produce is measured against AISC, NISD, OSHA and IBC guidance.",
   },
 ];
 
@@ -91,7 +91,7 @@ export default function CareersPage() {
               </p>
             </Reveal>
             <Reveal from="scale" delay={0.15} className="mt-10">
-              <div className="border-border/60 relative overflow-hidden rounded-2xl border bg-black">
+              <div className="border-border/60 bg-muted relative overflow-hidden rounded-2xl border">
                 <ProjectPhoto
                   src="/assets/images/stair2.jpg"
                   alt="Detailed steel stair"

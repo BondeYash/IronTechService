@@ -46,9 +46,8 @@ export function ProcessSection() {
           />
           <Reveal delay={0.1}>
             <p className="text-muted-foreground mt-6 leading-relaxed">
-              Seven steps, each with something you can actually hold — an
-              estimate, a bill of material, a checked model, a drawing set.
-              Nothing is issued on trust alone.
+              Seven steps, each with something you can actually hold — an estimate, a bill of
+              material, a checked model, a drawing set. Nothing is issued on trust alone.
             </p>
           </Reveal>
         </div>
@@ -57,7 +56,7 @@ export function ProcessSection() {
           <div className="bg-border/70 absolute top-2 bottom-2 left-[3px] w-px sm:left-[7px]">
             <div
               ref={railRef}
-              className="from-primary via-molten-400 to-primary/20 absolute inset-0 bg-gradient-to-b"
+              className="from-primary via-brand-400 to-primary/20 absolute inset-0 bg-gradient-to-b"
             />
           </div>
 
@@ -70,9 +69,7 @@ export function ProcessSection() {
                     {item.step}
                   </span>
                   <div>
-                    <h3 className="text-xl [--heading-weight:700]">
-                      {item.title}
-                    </h3>
+                    <h3 className="text-xl [--heading-weight:700]">{item.title}</h3>
                     <p className="text-muted-foreground mt-2 max-w-2xl text-sm leading-relaxed">
                       {item.body}
                     </p>

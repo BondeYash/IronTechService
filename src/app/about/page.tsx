@@ -13,7 +13,7 @@ import { stats } from "@/lib/stats";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Irontech Steel Detailing Services Pvt Ltd — an in-house team detailing structural and miscellaneous steel to AISC, NISD and OSHA standards using SDS/2.",
+    "Irontech Steel Detailing Services Pvt Ltd — an in-house team detailing structural and miscellaneous steel to AISC, NISD, OSHA and IBC standards using SDS/2.",
 };
 
 export default function AboutPage() {
@@ -41,7 +41,7 @@ export default function AboutPage() {
 
           <div className="space-y-8">
             <Reveal from="scale">
-              <div className="border-border/60 relative overflow-hidden rounded-2xl border bg-black">
+              <div className="border-border/60 bg-muted relative overflow-hidden rounded-2xl border">
                 <ProjectPhoto
                   src="/assets/images/cooper-west-high-school700-tons.jpg"
                   alt="Cooper West High School steel frame, 700 tons detailed"

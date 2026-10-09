@@ -103,7 +103,7 @@ export function ProjectGrid() {
             )}
           >
             {view === "mosaic" ? (
-              <div className="bg-black">
+              <div className="bg-muted">
                 <ProjectPhoto
                   src={project.image}
                   alt={project.title}
@@ -111,7 +111,7 @@ export function ProjectGrid() {
                 />
               </div>
             ) : (
-              <span className="relative h-16 w-24 shrink-0 rounded bg-black">
+              <span className="bg-muted relative h-16 w-24 shrink-0 rounded">
                 <Image src={project.image} alt="" fill sizes="96px" className="object-contain" />
               </span>
             )}

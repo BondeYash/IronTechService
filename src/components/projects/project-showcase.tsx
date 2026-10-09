@@ -49,7 +49,7 @@ export function ProjectShowcase({ items }: { items: Project[] }) {
         type="button"
         onClick={() => setSelected(index)}
         aria-label={`View ${active.title}`}
-        className="border-border hover:border-primary focus-visible:outline-primary block w-full overflow-hidden rounded-xl border bg-black text-left focus-visible:outline-2"
+        className="border-border hover:border-primary focus-visible:outline-primary bg-muted block w-full overflow-hidden rounded-xl border text-left focus-visible:outline-2"
       >
         <ProjectPhoto
           src={active.image}
@@ -78,7 +78,7 @@ export function ProjectShowcase({ items }: { items: Project[] }) {
               aria-label={`Show ${item.title}`}
               aria-pressed={index === i}
               className={cn(
-                "focus-visible:outline-primary relative h-14 w-20 shrink-0 rounded border bg-black focus-visible:outline-2",
+                "focus-visible:outline-primary bg-muted relative h-14 w-20 shrink-0 rounded border focus-visible:outline-2",
                 index === i ? "border-primary" : "border-border",
               )}
             >

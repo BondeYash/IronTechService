@@ -1,4 +1,5 @@
 import { projects } from "@/data/projects";
+import { standards } from "@/data/services";
 
 /** Packages with photography on the site. */
 export const publishedProjects = projects.length;
@@ -20,5 +21,5 @@ export const stats = [
   { value: deliveredPackages, suffix: "+", label: "Projects detailed" },
   { value: totalTonnage, suffix: "T", label: "Structural steel detailed" },
   { value: largestTonnage, suffix: "T", label: "Largest single package" },
-  { value: 3, suffix: "", label: "Standards followed: AISC, NISD, OSHA" },
+  { value: standards.length, suffix: "", label: `Standards followed: ${standards.join(", ")}` },
 ] as const;

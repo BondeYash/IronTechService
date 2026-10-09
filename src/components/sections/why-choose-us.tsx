@@ -9,14 +9,13 @@ const icons = [Target, HeartHandshake, ShieldCheck];
 // mission and values the company already publishes.
 const standardsCard = {
   title: "Our Standards",
-  body: "Detailing follows AISC and NISD practice with OSHA erection safety carried into the drawings, and every sheet is checked by a second detailer against the model before it leaves the office.",
+  body: "Detailing follows AISC, NISD and IBC requirements with OSHA erection safety carried into the drawings, and every sheet is checked by a second detailer against the model before it leaves the office.",
 };
 
 export function WhyChooseUs() {
   return (
     <section className="border-border/60 relative overflow-hidden border-y py-28 lg:py-36">
       <div className="blueprint-grid pointer-events-none absolute inset-0 opacity-60" />
-      <div className="bg-primary/10 pointer-events-none absolute top-1/2 left-1/2 h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[130px]" />
 
       <div className="container-x relative">
         <div className="mx-auto max-w-3xl text-center">

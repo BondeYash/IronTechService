@@ -1,17 +1,17 @@
 // Sourced from irontechdetailing.com (Home, AboutUs, Our-Services, Projects, Careers, Contact).
 
 export const site = {
-  name: "Irontech Detailing Services Pvt Ltd",
+  name: "Irontech Steel Detailing Services Pvt Ltd",
   legalName: "Irontech Steel Detailing Services Pvt Ltd",
   tagline: "The Structural Steel Detailing Company",
-  heroHeadline: "Welcome to Irontech Detailing Services Pvt Ltd",
+  heroHeadline: "Welcome to Irontech Steel Detailing Services Pvt Ltd",
   heroSubline: "The structural steel detailing company",
   ctaHeadline: "Contact For Structural Steel Detailing Services",
   ctaSubline: "Structural detailing services that bring your projects to life",
   legacyUrl: "https://irontechdetailing.com",
   logo: "/assets/logos/irontech.jpg",
   logoTransparent: "/assets/logos/itrans.png",
-  favicon: "/assets/logos/favicon.ico",
+  favicon: "/favicon.ico",
 } as const;
 
 export const contact = {

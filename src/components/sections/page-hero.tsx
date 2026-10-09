@@ -18,7 +18,7 @@ export function PageHero({
   imageAlt?: string;
 }) {
   return (
-    <section className="relative overflow-hidden pt-40 pb-20 lg:pt-52 lg:pb-28">
+    <section className="bg-background relative isolate overflow-hidden pt-40 pb-20 lg:pt-52 lg:pb-28">
       {image ? (
         <div className="absolute inset-0 -z-10">
           <Image
@@ -27,13 +27,12 @@ export function PageHero({
             fill
             sizes="100vw"
             priority
-            className="object-contain opacity-25"
+            className="object-contain opacity-10"
           />
-          <div className="from-background via-background/85 to-background absolute inset-0 bg-gradient-to-b" />
+          <div className="from-background via-background/95 to-background absolute inset-0 bg-gradient-to-b" />
         </div>
       ) : null}
       <div className="blueprint-grid pointer-events-none absolute inset-0 -z-10 opacity-50" />
-      <div className="bg-primary/15 pointer-events-none absolute -top-32 left-1/3 -z-10 h-96 w-96 rounded-full blur-[120px]" />
 
       <div className="container-x">
         <Reveal from="none">

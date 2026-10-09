@@ -8,7 +8,7 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-border/60 relative border-t">
+    <footer className="border-border/60 bg-background relative border-t">
       <div className="blueprint-grid pointer-events-none absolute inset-0 opacity-40" />
 
       <div className="border-border/60 relative border-b py-8">
@@ -28,7 +28,9 @@ export function SiteFooter() {
 
       <div className="container-x relative grid gap-12 py-16 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div className="space-y-5">
-          <p className="font-heading text-3xl tracking-tight [--heading-weight:800]">IRONTECH</p>
+          <p className="font-heading text-2xl leading-snug tracking-tight [--heading-weight:700]">
+            {site.name}
+          </p>
           <p className="text-muted-foreground max-w-xs text-sm leading-relaxed">
             {site.legalName} — {site.tagline.toLowerCase()}, detailing structural and miscellaneous
             steel for fabricators and erectors.
@@ -112,7 +114,7 @@ export function SiteFooter() {
           <p>
             © {year} {site.legalName}
           </p>
-          <p>Detailed to AISC · NISD · OSHA</p>
+          <p>Detailed to AISC · NISD · OSHA · IBC</p>
         </div>
       </div>
     </footer>

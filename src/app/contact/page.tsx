@@ -10,7 +10,7 @@ import { contactPage } from "@/data/content";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Request a structural steel detailing estimate from Irontech Detailing Services Pvt Ltd — tell us the scope, tonnage and schedule.",
+    "Request a structural steel detailing estimate from Irontech Steel Detailing Services Pvt Ltd — tell us the scope, tonnage and schedule.",
 };
 
 const channels = [

@@ -46,12 +46,12 @@ export function HeroVideo({ className }: { className?: string }) {
 
   return (
     <div ref={wrap} className={className} aria-hidden>
-      <div className="bg-steel-950 absolute inset-0" />
+      <div className="bg-background absolute inset-0" />
 
       {play ? (
         <video
           ref={video}
-          className="absolute inset-0 size-full object-cover opacity-70"
+          className="absolute inset-0 size-full object-cover opacity-[0.08]"
           src={SRC}
           poster={POSTER}
           muted
@@ -64,16 +64,14 @@ export function HeroVideo({ className }: { className?: string }) {
         <img
           src={POSTER}
           alt=""
-          className="absolute inset-0 size-full object-cover opacity-70"
+          className="absolute inset-0 size-full object-cover opacity-[0.08]"
           fetchPriority="high"
         />
       )}
 
-      {/* scrims: the headline sits on the left, so that side goes darkest */}
-      <div className="from-background via-background/80 absolute inset-0 bg-gradient-to-r to-transparent" />
+      {/* Keep the steel backdrop faint so the hero reads as a white surface. */}
+      <div className="from-background via-background/95 to-background/70 absolute inset-0 bg-gradient-to-r" />
       <div className="from-background absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
-      <div className="bg-background/35 absolute inset-0" />
-      <div className="hero-glow absolute top-[-14%] right-[-6%] h-[38rem] w-[38rem]" />
     </div>
   );
 }

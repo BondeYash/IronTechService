@@ -6,8 +6,7 @@ import { site, contact } from "@/data/site";
 
 export function CtaBand() {
   return (
-    <section className="relative overflow-hidden py-28 lg:py-36">
-      <div className="from-primary/15 absolute inset-0 bg-gradient-to-b via-transparent to-transparent" />
+    <section className="bg-background relative overflow-hidden py-28 lg:py-36">
       <div className="container-x relative text-center">
         <Reveal>
           <p className="eyebrow">{site.ctaHeadline}</p>
@@ -20,7 +19,7 @@ export function CtaBand() {
         <Reveal delay={0.15} className="mt-12 flex flex-wrap justify-center gap-4">
           <Link
             href="/contact"
-            className="group bg-primary text-primary-foreground hover:bg-molten-400 inline-flex items-center gap-2 rounded-full px-8 py-4 font-medium transition-colors"
+            className="group bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center gap-2 rounded-full px-8 py-4 font-medium transition-colors"
           >
             Start your project
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />

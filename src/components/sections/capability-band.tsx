@@ -24,20 +24,17 @@ export function CapabilityBand() {
             "Shop Drawings",
             "Erection Plans",
             "CNC & DXF Output",
-            "AISC · NISD · OSHA",
+            "AISC · NISD · OSHA · IBC",
           ]}
           className="text-muted-foreground/70"
           speed={52}
         />
       </div>
 
-      <Reveal
-        stagger={0.08}
-        className="container-x grid grid-cols-2 gap-y-10 py-14 lg:grid-cols-4"
-      >
+      <Reveal stagger={0.08} className="container-x grid grid-cols-2 gap-y-10 py-14 lg:grid-cols-4">
         {figures.map((f) => (
           <div key={f.label} className="text-center lg:text-left">
-            <p className="font-heading molten-text text-[clamp(2.2rem,5vw,3.6rem)] leading-none tracking-tight [--heading-weight:800]">
+            <p className="font-heading brand-text text-[clamp(2.2rem,5vw,3.6rem)] leading-none tracking-tight [--heading-weight:800]">
               <Counter value={f.value} suffix={f.suffix} />
             </p>
             <p className="text-muted-foreground mt-3 font-mono text-[0.6rem] tracking-[0.2em] uppercase">

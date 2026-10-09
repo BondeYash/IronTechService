@@ -36,12 +36,7 @@ const glyphs: Record<Glyph, React.ReactNode> = {
   // hard hat
   helmet: (
     <>
-      <path
-        d="M13 28a11 11 0 0 1 22 0"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
+      <path d="M13 28a11 11 0 0 1 22 0" fill="none" stroke="currentColor" strokeWidth="2" />
       <path
         d="M20 18.5V15h8v3.5"
         fill="none"
@@ -65,15 +60,7 @@ const glyphs: Record<Glyph, React.ReactNode> = {
   // stacked records = production data
   stack: (
     <>
-      <ellipse
-        cx="24"
-        cy="16"
-        rx="9"
-        ry="3.4"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
+      <ellipse cx="24" cy="16" rx="9" ry="3.4" fill="none" stroke="currentColor" strokeWidth="2" />
       <path
         d="M15 16v8c0 1.9 4 3.4 9 3.4s9-1.5 9-3.4v-8M15 24v6c0 1.9 4 3.4 9 3.4s9-1.5 9-3.4v-6"
         fill="none"
@@ -108,6 +95,7 @@ export const standardMarks: BadgeMark[] = [
   { code: "AISC", caption: "Detailing practice", glyph: "beam", shape: "shield" },
   { code: "NISD", caption: "Drafting standards", glyph: "compass", shape: "shield" },
   { code: "OSHA", caption: "Erection safety", glyph: "helmet", shape: "shield" },
+  { code: "IBC", caption: "Building code", glyph: "beam", shape: "shield" },
 ];
 
 export const softwareMarks: BadgeMark[] = [
@@ -122,13 +110,7 @@ const outlines: Record<BadgeMark["shape"], string> = {
   plate: "M8 6h32a2 2 0 0 1 2 2v32a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z",
 };
 
-export function StandardBadge({
-  mark,
-  className,
-}: {
-  mark: BadgeMark;
-  className?: string;
-}) {
+export function StandardBadge({ mark, className }: { mark: BadgeMark; className?: string }) {
   return (
     <div
       className={cn(
@@ -136,11 +118,7 @@ export function StandardBadge({
         className,
       )}
     >
-      <svg
-        viewBox="0 0 48 48"
-        className="text-primary size-11 shrink-0"
-        aria-hidden
-      >
+      <svg viewBox="0 0 48 48" className="text-primary size-11 shrink-0" aria-hidden>
         <path
           d={outlines[mark.shape]}
           fill="none"
@@ -162,15 +140,9 @@ export function StandardBadge({
   );
 }
 
-export function BadgeRow({
-  marks,
-  className,
-}: {
-  marks: BadgeMark[];
-  className?: string;
-}) {
+export function BadgeRow({ marks, className }: { marks: BadgeMark[]; className?: string }) {
   return (
-    <div className={cn("grid gap-3 sm:grid-cols-3", className)}>
+    <div className={cn("grid gap-3 sm:grid-cols-2", className)}>
       {marks.map((mark) => (
         <StandardBadge key={mark.code} mark={mark} />
       ))}

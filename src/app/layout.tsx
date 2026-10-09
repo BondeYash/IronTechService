@@ -3,7 +3,7 @@ import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
-import { AudioProvider } from "@/components/audio/audio-engine";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { RevealReady } from "@/components/motion/reveal-ready";
@@ -35,14 +35,14 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description:
-    "Irontech Detailing Services Pvt Ltd delivers accurate, on-schedule structural and miscellaneous steel detailing — shop and erection drawings, SDS/2 modelling, connection design and CNC/DXF deliverables to AISC, NISD and OSHA standards.",
+    "Irontech Steel Detailing Services Pvt Ltd delivers accurate, on-schedule structural and miscellaneous steel detailing — shop and erection drawings, SDS/2 modelling, connection design and CNC/DXF deliverables to AISC, NISD, OSHA and IBC standards.",
   keywords: [
     "structural steel detailing",
     "shop drawings",
     "erection drawings",
     "SDS/2 detailing",
     "miscellaneous steel detailing",
-    "AISC NISD OSHA",
+    "AISC NISD OSHA IBC",
     "steel connection design",
   ],
   openGraph: {
@@ -54,12 +54,11 @@ export const metadata: Metadata = {
     url: "/",
   },
   twitter: { card: "summary_large_image" },
-  icons: { icon: "/assets/logos/favicon.ico" },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0d1016",
-  colorScheme: "dark",
+  themeColor: "#ffffff",
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -93,7 +92,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <RevealReady />
-        <AudioProvider>
+        <ThemeProvider>
           <SmoothScroll>
             <SiteHeader />
             <main id="main" className="flex-1">
@@ -101,7 +100,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </main>
             <SiteFooter />
           </SmoothScroll>
-        </AudioProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

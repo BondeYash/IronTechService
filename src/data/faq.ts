@@ -9,7 +9,7 @@ export const faqs = [
   },
   {
     q: "Which codes and standards do you work to?",
-    a: "Detailing follows AISC and NISD practice, with OSHA requirements carried through erection safety items such as perimeter cable holes, seats and stability connections. Job-specific fabrication standards are set up before drawings start.",
+    a: "Detailing follows AISC, NISD and IBC requirements, with OSHA requirements carried through erection safety items such as perimeter cable holes, seats and stability connections. Job-specific fabrication standards are set up before drawings start.",
   },
   {
     q: "Can you design connections?",
